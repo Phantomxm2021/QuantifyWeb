@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Quantify</title>
+    <meta name="description" content="Privacy Policy for Quantify App">
+    <link rel="icon" type="image/png" href="./AppIcon_Chart.png">
+    <style>
+        :root {
+            --bg-color: #050510;
+            --card-bg: #121225;
+            --text-main: #ffffff;
+            --text-secondary: #b0b0cc;
+            --accent-primary: #6366f1;
+            --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(to right, #fff, #a5b4fc);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        p,
+        li {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .language-switch {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 100;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        section {
+            display: none;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        a {
+            color: var(--accent-primary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .last-updated {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="language-switch">
+        <button class="lang-btn" onclick="toggleLanguage()">🌐 EN / CN</button>
+    </div>
+
+    <div class="container">
+
+        <!-- English Content -->
+        <section id="en-content" class="active">
+            <h1>Privacy Policy</h1>
+            <p class="last-updated">Last Updated: December 10, 2025</p>
+
+            <p>Welcome to Quantify ("we," "our," or "us"). We respect your privacy and are committed to protecting your
+                personal data. This privacy policy will inform you as to how we look after your personal data when you
+                use the Quantify mobile application (the "App") and tells you about your privacy rights and how the law
+                protects you.</p>
+
+            <h2>1. Information We Collect</h2>
+            <p>We may collect, use, store and transfer different kinds of personal data about you which we have grouped
+                together follows:</p>
+            <ul>
+                <li><strong>Identity Data:</strong> includes username or similar identifier, if you create an account.
+                </li>
+                <li><strong>Image Data:</strong> includes screenshots or images of financial charts that you upload for
+                    analysis.</li>
+                <li><strong>Usage Data:</strong> includes information about how you use our App, such as button taps and
+                    feature usage.</li>
+                <li><strong>Device Data:</strong> includes internet protocol (IP) address, device type, operating system
+                    version, and unique device identifiers.</li>
+            </ul>
+
+            <h2>2. How We Use Your Information</h2>
+            <p>We use your personal data in the following circumstances:</p>
+            <ul>
+                <li><strong>To Provide Services:</strong> To process your chart images using Google Gemini AI and return
+                    technical analysis strategies.</li>
+                <li><strong>To Improve Our App:</strong> To understand how users interact with the App and identify
+                    areas for improvement.</li>
+                <li><strong>To Manage Your Account:</strong> To manage your subscription and user profile.</li>
+            </ul>
+
+            <h2>3. Third-Party Services</h2>
+            <p>We use the following third-party services to operate the App:</p>
+            <ul>
+                <li><strong>Google Gemini AI:</strong> We send the chart images you upload to Google's Gemini API for
+                    analysis. Please refer to Google's Privacy Policy for more information on how they handle data.</li>
+                <li><strong>Supabase:</strong> We use Supabase for authentication and database services.</li>
+                <li><strong>RevenueCat:</strong> We use RevenueCat to manage in-app subscriptions.</li>
+            </ul>
+
+            <h2>4. Data Retention</h2>
+            <p>We will only retain your personal data for as long as necessary to fulfil the purposes we collected it
+                for, including for the purposes of satisfying any legal, accounting, or reporting requirements. Chart
+                images uploaded for analysis are typically processed in real-time and are not permanently stored by us
+                unless you choose to save them to your history.</p>
+
+            <h2>5. Your Rights</h2>
+            <p>Under certain circumstances, you have rights under data protection laws in relation to your personal
+                data, including the right to request access, correction, erasure, restriction, transfer, to object to
+                processing, to portability of data and (where the lawful ground of processing is consent) to withdraw
+                consent.</p>
+
+            <h2>6. Contact Us</h2>
+            <p>If you have any questions about this privacy policy or our privacy practices, please contact us at: <a
+                    href="mailto:nswell@phantomsxr.com">nswell@phantomsxr.com</a></p>
+        </section>
+
+        <!-- Chinese Content -->
+        <section id="cn-content">
+            <h1>隐私政策</h1>
+            <p class="last-updated">更新日期：2025年12月10日</p>
+
+            <p>欢迎使用 Quantify（以下简称“我们”）。我们尊重您的隐私并致力于保护您的个人数据。本隐私政策旨在告知您当您使用 Quantify
+                移动应用程序（以下简称“App”）时，我们如何处理您的个人数据，以及您的隐私权利和法律如何保护您。</p>
+
+            <h2>1. 我们收集的信息</h2>
+            <p>我们可能会收集、使用、存储和传输关于您的不同类型的个人数据，分类如下：</p>
+            <ul>
+                <li><strong>身份数据：</strong> 如果您创建账户，包括用户名或类似标识符。</li>
+                <li><strong>图像数据：</strong> 包括您上传用于分析的金融图表截图或图片。</li>
+                <li><strong>使用数据：</strong> 包括有关您如何使用我们 App 的信息，例如按钮点击和功能使用情况。</li>
+                <li><strong>设备数据：</strong> 包括互联网协议 (IP) 地址、设备类型、操作系统版本和唯一设备标识符。</li>
+            </ul>
+
+            <h2>2. 我们如何使用您的信息</h2>
+            <p>我们在以下情况下使用您的个人数据：</p>
+            <ul>
+                <li><strong>提供服务：</strong> 使用 Google Gemini AI 处理您的图表图像并返回技术分析策略。</li>
+                <li><strong>改进 App：</strong> 了解用户如何与 App 交互并确定改进领域。</li>
+                <li><strong>管理账户：</strong> 管理您的订阅和用户资料。</li>
+            </ul>
+
+            <h2>3. 第三方服务</h2>
+            <p>我们使用以下第三方服务来运营 App：</p>
+            <ul>
+                <li><strong>Google Gemini AI：</strong> 我们会将您上传的图表图像发送至 Google Gemini API 进行分析。请参阅 Google
+                    的隐私政策以了解他们如何处理数据。</li>
+                <li><strong>Supabase：</strong> 我们使用 Supabase 提供身份验证和数据库服务。</li>
+                <li><strong>RevenueCat：</strong> 我们使用 RevenueCat 管理应用内订阅。</li>
+            </ul>
+
+            <h2>4. 数据保留</h2>
+            <p>我们仅在满足收集目的所需的时间内保留您的个人数据，包括满足任何法律、会计或报告要求。除非您选择将其保存到历史记录中，否则上传用于分析的图表图像通常会进行实时处理，我们不会永久存储。</p>
+
+            <h2>5. 您的权利</h2>
+            <p>在某些情况下，根据数据保护法律，您拥有与您的个人数据相关的权利，包括请求访问、更正、删除、限制、转移、反对处理、数据可移植性的权利，以及（如果处理的法律依据是同意）撤回同意的权利。</p>
+
+            <h2>6. 联系我们</h2>
+            <p>如果您对本隐私政策或我们的隐私惯例有任何疑问，请通过以下方式联系我们：<a href="mailto:nswell@phantomsxr.com">nswell@phantomsxr.com</a></p>
+        </section>
+
+    </div>
+
+    <script>
+        function getSystemLanguage() {
+            var lang = navigator.language || navigator.userLanguage;
+            if (lang.toLowerCase().startsWith('zh')) {
+                return 'cn';
+            }
+            return 'en';
+        }
+
+        let currentLang = getSystemLanguage();
+        updateDisplay();
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'cn' : 'en';
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            const enContent = document.getElementById('en-content');
+            const cnContent = document.getElementById('cn-content');
+
+            if (currentLang === 'en') {
+                enContent.classList.add('active');
+                cnContent.classList.remove('active');
+            } else {
+                cnContent.classList.add('active');
+                enContent.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+
+</html>
