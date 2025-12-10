@@ -40,6 +40,7 @@
             line-height: 1.1;
             font-weight: 800;
             background: linear-gradient(to right, #fff, #a5b4fc);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 1.5rem;
@@ -148,6 +149,13 @@
             flex: 1;
             padding-right: 4rem;
             z-index: 2;
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            flex-wrap: wrap;
         }
 
         .hero-image {
@@ -283,17 +291,35 @@
         }
 
         @media (max-width: 768px) {
+
+            html,
+            body {
+                width: 100%;
+                overflow-x: hidden;
+                position: relative;
+            }
+
+            /* Global constraint */
+            * {
+                max-width: 100%;
+            }
+
             h1 {
-                font-size: 2.2rem;
+                font-size: 2rem;
                 text-align: center;
+                word-wrap: break-word;
+                /* Prevent long words breaking layout */
             }
 
             h2 {
-                font-size: 2rem;
+                font-size: 1.75rem;
             }
 
             .container {
-                padding: 0 1.5rem;
+                padding: 0 1.25rem;
+                width: 100%;
+                overflow: hidden;
+                /* Ensure container clips inner content */
             }
 
             section {
@@ -301,15 +327,26 @@
             }
 
             .hero {
-                flex-direction: column;
-                padding-top: 7rem;
+                padding-top: 6rem;
                 padding-bottom: 2rem;
-                text-align: center;
+            }
+
+            .hero-container {
+                flex-direction: column;
             }
 
             .hero-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
                 padding-right: 0;
                 margin-bottom: 3rem;
+                width: 100%;
+                /* Explicit width */
+            }
+
+            p {
+                font-size: 1rem;
             }
 
             .hero-image {
@@ -318,21 +355,43 @@
             }
 
             .phone-frame {
+                transition: none;
                 transform: none;
                 width: 70%;
-                max-width: 280px;
+                max-width: 260px;
                 border-width: 3px;
+                margin: 0 auto;
+                /* Center explicit */
+            }
+
+            /* Hide glow on mobile to prevent overflow/distraction */
+            .glow {
+                display: none;
             }
 
             .features-grid {
-                grid-template-columns: 1fr;
+                display: flex;
+                flex-direction: column;
                 gap: 1.5rem;
             }
 
-            .cta-button {
-                display: block;
+            .feature-card {
                 width: 100%;
-                margin-bottom: 0.5rem;
+            }
+
+            /* Button adjustments - flexible width */
+            .cta-button {
+                display: inline-flex;
+                justify-content: center;
+                width: 100%;
+                /* Fill container */
+                max-width: 300px;
+                /* But not too wide */
+                padding: 0.8rem 1rem !important;
+                font-size: 1rem !important;
+                margin: 0.5rem 0;
+                min-width: 0;
+                /* Remove min-width */
             }
 
             .cta-button.secondary {
@@ -342,6 +401,13 @@
             .footer-links {
                 flex-direction: column;
                 gap: 1rem;
+            }
+
+            .hero-content>div {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
             }
         }
     </style>
@@ -368,7 +434,7 @@
 
     <main>
         <section class="hero">
-            <div class="container" style="display: flex; align-items: center; width: 100%; flex-wrap: wrap;">
+            <div class="container hero-container">
                 <div class="hero-content">
                     <h1 data-i18n="hero-title">Your AI Analyst for Every Trade.</h1>
                     <p data-i18n="hero-subtitle">Upload a chart. Get a strategy. Powered by Google's Gemini AI, Quantify
