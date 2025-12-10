@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantify - AI Intelligent Stock & Crypto Analysis</title>
+    <meta name="description"
+        content="Turn screenshots into professional trading strategies instantly. Powered by Google Gemini AI.">
+    <link rel="icon" type="image/png" href="./AppIcon_Chart.png">
+    <style>
+        :root {
+            --bg-color: #050510;
+            --card-bg: #121225;
+            --accent-primary: #6366f1;
+            --accent-secondary: #8b5cf6;
+            --text-main: #ffffff;
+            --text-secondary: #b0b0cc;
+            --gradient-main: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            font-weight: 800;
+            background: linear-gradient(to right, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        h3 {
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            z-index: 10;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo img {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+        }
+
+        /* Buttons */
+        .cta-button {
+            background: var(--gradient-main);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 99px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px rgba(99, 102, 241, 0.5);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin-left: 1rem;
+        }
+
+        .cta-button.secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 6rem;
+            padding-bottom: 4rem;
+        }
+
+        .hero-content {
+            flex: 1;
+            padding-right: 4rem;
+            z-index: 2;
+        }
+
+        .hero-image {
+            flex: 1;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            perspective: 1000px;
+        }
+
+        .phone-frame {
+            width: 300px;
+            /* Adjust based on image ratio */
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 100px -20px rgba(99, 102, 241, 0.3);
+            overflow: hidden;
+            border: 4px solid #333;
+            /* Simplified border */
+            transform: rotateY(-5deg) rotateX(5deg);
+            transition: transform 0.5s;
+        }
+
+        .phone-frame:hover {
+            transform: rotateY(0deg) rotateX(0deg);
+        }
+
+        .phone-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Gradient Orbs */
+        .glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            border: var(--glass-border);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 1.5rem;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a5b4fc;
+        }
+
+        .feature-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Footer */
+        footer {
+            border-top: var(--glass-border);
+            padding: 4rem 0;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .language-switch {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            z-index: 20;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+                text-align: center;
+            }
+
+            .hero {
+                flex-direction: column;
+                padding-top: 8rem;
+                text-align: center;
+            }
+
+            .hero-content {
+                padding-right: 0;
+                margin-bottom: 4rem;
+            }
+
+            .hero-image {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .phone-frame {
+                transform: none;
+                width: 80%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="language-switch">
+        <button class="lang-btn" onclick="toggleLanguage()">🌐 EN / CN</button>
+    </div>
+
+    <div class="glow"></div>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="./AppIcon_Chart.png" alt="Quantify Logo">
+                    <span>Quantify</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container" style="display: flex; align-items: center; width: 100%; flex-wrap: wrap;">
+                <div class="hero-content">
+                    <h1 data-i18n="hero-title">Your AI Analyst for Every Trade.</h1>
+                    <p data-i18n="hero-subtitle">Upload a chart. Get a strategy. Powered by Google's Gemini AI, Quantify
+                        turns screenshots into institutional-grade technical analysis instantly.</p>
+                    <div style="margin-top: 2rem;">
+                        <a href="https://apps.apple.com/us/app/trading-analysis/id6756243902" class="cta-button"
+                            data-i18n="download-btn">Download on App Store</a>
+                        <a href="#features" class="cta-button secondary" data-i18n="learn-more-btn">Learn More</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="phone-frame">
+                        <img src="./ScreenShot_1682_cn.jpg" alt="App Screenshot">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" style="background: rgba(0,0,0,0.2);">
+            <div class="container">
+                <h2 data-i18n="features-title">Why Quantify?</h2>
+                <p style="text-align: center; max-width: 600px; margin: 0 auto; margin-bottom: 3rem;"
+                    data-i18n="features-subtitle">Advanced AI that understands market structure better than a human
+                    analyst.</p>
+
+                <div class="features-grid">
+                    <!-- Feature 1 -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <!-- Search/Scan Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                            </svg>
+                        </div>
+                        <h3 data-i18n="f1-title">Instant Recognition</h3>
+                        <p data-i18n="f1-desc">Upload any chart—Stocks, Crypto, or Forex. Our AI identifies patterns,
+                            trends, and key support/resistance levels in seconds.</p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <!-- Target/Strategy Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+                            </svg>
+                        </div>
+                        <h3 data-i18n="f2-title">Precise Strategies</h3>
+                        <p data-i18n="f2-desc">Don't just get analysis, get a plan. We provide specific Entry Zones,
+                            Profit Targets, and Stop Loss levels.</p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <!-- Lightning/Flash Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                            </svg>
+                        </div>
+                        <h3 data-i18n="f3-title">Options Intelligence</h3>
+                        <p data-i18n="f3-desc">Perfect for options traders. Get tailored Call/Put strategies with
+                            recommended strikes and expiration dates.</p>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <!-- Brain/Logic Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
+                            </svg>
+                        </div>
+                        <h3 data-i18n="f4-title">Deep Logic</h3>
+                        <p data-i18n="f4-desc">Understand the "Why". Read detailed Bull and Bear case scenarios to
+                            navigate market uncertainty with confidence.</p>
+                    </div>
+
+                    <!-- Feature 5 -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <!-- Shield/Privacy Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                            </svg>
+                        </div>
+                        <h3 data-i18n="f5-title">Privacy First</h3>
+                        <p data-i18n="f5-desc">Your data is yours. Support for "Bring Your Own Key" ensures your trading
+                            queries remain private and under your control.</p>
+                    </div>
+
+                    <!-- Feature 6 -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <!-- Globe/Global Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S12 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S12 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+                            </svg>
+                        </div>
+                        <h3 data-i18n="f6-title">Global Access</h3>
+                        <p data-i18n="f6-desc">Optimized for global markets including US Stocks, A-Shares, and Crypto.
+                            Direct connection available for China region users.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section style="text-align: center; padding: 8rem 0;">
+            <div class="container">
+                <h2 data-i18n="cta-title">Ready to Upgrade Your Trading?</h2>
+                <p data-i18n="cta-subtitle">Join thousands of traders using AI to find their edge.</p>
+                <a href="https://apps.apple.com/us/app/trading-analysis/id6756243902" class="cta-button"
+                    style="padding: 1rem 3rem; font-size: 1.2rem; margin-top: 1rem;"
+                    data-i18n="download-now-btn">Download
+                    Quantify Now</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://phantomsxr.com/privacy" data-i18n="footer-privacy">Privacy Policy</a>
+                <a href="https://phantomsxr.com/terms" data-i18n="footer-terms">Terms of Service</a>
+                <a href="mailto:nswell@phantomsxr.com" data-i18n="footer-support">Support</a>
+                <a href="mailto:nswell@phantomsxr.com" data-i18n="footer-contact">Contact</a>
+            </div>
+            <p style="font-size: 0.9rem; opacity: 0.5;">&copy; 2025 Quantify Team. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const content = {
+            en: {
+                "hero-title": "Your AI Analyst for Every Trade.",
+                "hero-subtitle": "Upload a chart. Get a strategy. Powered by Google's Gemini AI, Quantify turns screenshots into institutional-grade technical analysis instantly.",
+                "download-btn": "Download on App Store",
+                "download-now-btn": "Download Quantify Now",
+                "learn-more-btn": "Learn More",
+                "features-title": "Why Quantify?",
+                "features-subtitle": "Advanced AI that understands market structure better than a human analyst.",
+                "f1-title": "Instant Recognition",
+                "f1-desc": "Upload any chart—Stocks, Crypto, or Forex. Our AI identifies patterns, trends, and key support/resistance levels in seconds.",
+                "f2-title": "Precise Strategies",
+                "f2-desc": "Don't just get analysis, get a plan. We provide specific Entry Zones, Profit Targets, and Stop Loss levels.",
+                "f3-title": "Options Intelligence",
+                "f3-desc": "Perfect for options traders. Get tailored Call/Put strategies with recommended strikes and expiration dates.",
+                "f4-title": "Deep Logic",
+                "f4-desc": "Understand the \"Why\". Read detailed Bull and Bear case scenarios to navigate market uncertainty with confidence.",
+                "f5-title": "Privacy First",
+                "f5-desc": "Your data is yours. Support for \"Bring Your Own Key\" ensures your trading queries remain private and under your control.",
+                "f6-title": "Global Access",
+                "f6-desc": "Optimized for global markets including US Stocks, A-Shares, and Crypto. Direct connection available for China region users.",
+                "cta-title": "Ready to Upgrade Your Trading?",
+                "cta-subtitle": "Join thousands of traders using AI to find their edge.",
+                "footer-privacy": "Privacy Policy",
+                "footer-terms": "Terms of Service",
+                "footer-support": "Support",
+                "footer-contact": "Contact"
+            },
+            cn: {
+                "hero-title": "您的专属 AI 交易分析师",
+                "hero-subtitle": "一键截图，生成策略。基于 Google Gemini AI，Quantify 将任意 K 线图瞬间转化为专业级技术分析。",
+                "download-btn": "App Store 下载",
+                "download-now-btn": "立即下载 Quantify",
+                "learn-more-btn": "了解更多",
+                "features-title": "为什么选择 Quantify?",
+                "features-subtitle": "深度理解市场结构的 AI，比人类分析师更敏锐。",
+                "f1-title": "即时识别",
+                "f1-desc": "支持股票、加密货币或外汇。AI 在几秒钟内识别形态、趋势以及关键的支撑/阻力位。",
+                "f2-title": "精准策略",
+                "f2-desc": "不只是分析，更是计划。我们提供明确的进场区、止盈目标和止损点位。",
+                "f3-title": "期权智能",
+                "f3-desc": "期权交易者的利器。获取定制化的看涨/看跌策略，包含推荐的行权价和到期日。",
+                "f4-title": "深度逻辑",
+                "f4-desc": "知其然，更知其所以然。详细的看涨和看跌逻辑推演，助您自信应对市场波动。",
+                "f5-title": "隐私优先",
+                "f5-desc": "您的数据属于您。支持“自备 Key”模式，确保交易查询完全隐私且自主可控。",
+                "f6-title": "全球通用",
+                "f6-desc": "针对全球市场优化，涵盖美股、A股和加密货币。中国地区用户通过直连即可高速访问。",
+                "cta-title": "准备好升级您的交易了吗？",
+                "cta-subtitle": "加入数千名交易者的行列，用 AI 寻找市场优势。",
+                "footer-privacy": "隐私政策",
+                "footer-terms": "服务条款",
+                "footer-support": "支持",
+                "footer-contact": "联系我们"
+            }
+        };
+
+        let currentLang = 'en';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'cn' : 'en';
+
+            // Iterate over keys and update elements
+            for (const key in content[currentLang]) {
+                const el = document.querySelector(`[data-i18n="${key}"]`);
+                if (el) {
+                    el.innerText = content[currentLang][key];
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
