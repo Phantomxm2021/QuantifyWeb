@@ -347,7 +347,7 @@
                 </div>
                 <div class="hero-image">
                     <div class="phone-frame">
-                        <img src="./ScreenShot_1682_cn.jpg" alt="App Screenshot">
+                        <img id="app-screenshot" src="./ScreenShot_1682_en.jpg" alt="App Screenshot">
                     </div>
                 </div>
             </div>
@@ -505,7 +505,8 @@
                 "footer-privacy": "Privacy Policy",
                 "footer-terms": "Terms of Service",
                 "footer-support": "Support",
-                "footer-contact": "Contact"
+                "footer-contact": "Contact",
+                "app-screenshot": "./ScreenShot_1682_en.jpg"
             },
             cn: {
                 "hero-title": "您的专属 AI 交易分析师",
@@ -532,7 +533,8 @@
                 "footer-privacy": "隐私政策",
                 "footer-terms": "服务条款",
                 "footer-support": "支持",
-                "footer-contact": "联系我们"
+                "footer-contact": "联系我们",
+                "app-screenshot": "./ScreenShot_1682_cn.jpg"
             }
         };
 
@@ -547,6 +549,12 @@
                 if (el) {
                     el.innerText = content[currentLang][key];
                 }
+            }
+
+            // Update image
+            const img = document.getElementById('app-screenshot');
+            if (img && content[currentLang]['app-screenshot']) {
+                img.src = content[currentLang]['app-screenshot'];
             }
         }
     </script>
